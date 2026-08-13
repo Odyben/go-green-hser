@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program QR Hijau @ Kafeteria Hospital Serian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-50:#f0fbf4;
+    --green-100:#dcf5e4;
+    --green-200:#b3e9c4;
+    --green-500:#22a35e;
+    --green-600:#188a4c;
+    --green-700:#136e3c;
+    --ink:#1b2420;
+    --muted:#6b7a71;
+    --border:#e3ece5;
+    --card:#ffffff;
+    --page-bg-1:#eafaf0;
+    --page-bg-2:#f4fbf6;
+    --danger:#e0453a;
+    --shadow-sm:0 1px 2px rgba(20,60,35,.06);
+    --shadow-md:0 8px 24px rgba(20,60,35,.08);
+    --shadow-lg:0 20px 45px rgba(19,110,60,.14);
+    --radius:20px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 500px at 15% -10%, #d5f4e0 0%, transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, #cdeedd 0%, transparent 55%),
+      linear-gradient(180deg, var(--page-bg-1), var(--page-bg-2) 40%, #eef6f0 100%);
+    min-height:100vh;
+    padding:48px 16px 80px;
+  }
+
+  .wrap{
+    max-width:680px;
+    margin:0 auto;
+  }
+
+  /* Top accent bar */
+  .accent-bar{
+    height:10px;
+    border-radius:10px 10px 0 0;
+    background:linear-gradient(90deg,#2ec06a,#17a862 45%,#0f8f7d);
+    box-shadow:var(--shadow-md);
+  }
+
+  .hero{
+    background:var(--card);
+    border-radius:0 0 var(--radius) var(--radius);
+    box-shadow:var(--shadow-lg);
+    padding:36px 40px 30px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:-60px; right:-60px;
+    width:220px; height:220px;
+    background:radial-gradient(circle, var(--green-100) 0%, transparent 70%);
+    border-radius:50%;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .brand-badge{
+    width:44px; height:44px;
+    border-radius:12px;
+    background:linear-gradient(145deg,#2ec06a,#0f8f5c);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px rgba(15,143,92,.35);
+    flex-shrink:0;
+  }
+  .brand-badge svg{width:24px;height:24px;}
+  .brand-name{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--green-700);
+  }
+
+  h1{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:30px;
+    line-height:1.25;
+    margin:0 0 14px;
+    color:var(--ink);
+    position:relative;
+  }
+
+  .tagline{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:15px;
+    font-weight:600;
+    color:var(--green-700);
+    margin-bottom:18px;
+  }
+
+  .desc{
+    font-size:15.5px;
+    line-height:1.65;
+    color:#3b4a41;
+    margin:0 0 18px;
+  }
+
+  .rules{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .rule{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    background:var(--green-50);
+    border:1px solid var(--green-100);
+    padding:12px 14px;
+    border-radius:14px;
+    font-size:14.5px;
+    color:#274b36;
+  }
+  .rule .icon{
+    width:26px;height:26px;
+    border-radius:8px;
+    background:var(--green-500);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;
+    flex-shrink:0;
+  }
+  .rule.gift .icon{background:#f0a83a;}
+
+  .thanks{
+    font-size:14.5px;
+    color:var(--muted);
+    margin:0;
+  }
+
+  .meta-bar{
+    margin-top:24px;
+    padding-top:18px;
+    border-top:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .account{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13.5px;
+    color:var(--muted);
+  }
+  .avatar{
+    width:26px;height:26px;
+    border-radius:50%;
+    background:linear-gradient(145deg,#2ec06a,#0f8f5c);
+    color:#fff;
+    font-size:12px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .account a{color:var(--green-600);text-decoration:none;font-weight:600;}
+  .account a:hover{text-decoration:underline;}
+  .saved{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  .required-note{
+    background:var(--card);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-md);
+    padding:14px 24px;
+    margin-top:20px;
+    font-size:13.5px;
+    color:var(--danger);
+    font-weight:600;
+  }
+
+  /* Question cards */
+  .q-card{
+    background:var(--card);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-md);
+    padding:26px 28px 28px;
+    margin-top:20px;
+    border:1.5px solid transparent;
+    transition:box-shadow .2s ease, border-color .2s ease, transform .15s ease;
+  }
+  .q-card:hover{
+    box-shadow:var(--shadow-lg);
+  }
+  .q-card:focus-within{
+    border-color:var(--green-500);
+  }
+
+  .q-label{
+    font-size:16px;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .q-label .req{color:var(--danger);font-size:16px;}
+
+  input[type="text"], input[type="tel"]{
+    width:100%;
+    border:none;
+    border-bottom:2px solid var(--border);
+    padding:8px 2px 10px;
+    font-size:15px;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:transparent;
+    outline:none;
+    transition:border-color .2s ease;
+  }
+  input[type="text"]::placeholder, input[type="tel"]::placeholder{
+    color:#9aa8a0;
+  }
+  input[type="text"]:focus, input[type="tel"]:focus{
+    border-bottom:2px solid var(--green-500);
+  }
+
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+
+  .option{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:11px 12px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:background .15s ease;
+    user-select:none;
+  }
+  .option:hover{
+    background:var(--green-50);
+  }
+
+  .option input{
+    position:absolute;
+    opacity:0;
+    width:0;height:0;
+  }
+
+  .radio-ui, .check-ui{
+    width:20px;height:20px;
+    flex-shrink:0;
+    border:2px solid #c7d4cc;
+    background:#fff;
+    transition:border-color .18s ease, background .18s ease;
+    position:relative;
+  }
+  .radio-ui{border-radius:50%;}
+  .check-ui{border-radius:6px;}
+
+  .radio-ui::after{
+    content:"";
+    position:absolute;
+    top:50%;left:50%;
+    width:10px;height:10px;
+    border-radius:50%;
+    background:var(--green-500);
+    transform:translate(-50%,-50%) scale(0);
+    transition:transform .16s ease;
+  }
+  .check-ui::after{
+    content:"";
+    position:absolute;
+    left:5px; top:1px;
+    width:6px;height:11px;
+    border:solid #fff;
+    border-width:0 2px 2px 0;
+    transform:rotate(45deg) scale(0);
+    transition:transform .16s ease;
+  }
+
+  .option input:checked ~ .radio-ui{
+    border-color:var(--green-500);
+  }
+  .option input:checked ~ .radio-ui::after{
+    transform:translate(-50%,-50%) scale(1);
+  }
+  .option input:checked ~ .check-ui{
+    border-color:var(--green-500);
+    background:var(--green-500);
+  }
+  .option input:checked ~ .check-ui::after{
+    transform:rotate(45deg) scale(1);
+  }
+  .option input:focus-visible ~ .radio-ui,
+  .option input:focus-visible ~ .check-ui{
+    outline:2px solid var(--green-500);
+    outline-offset:2px;
+  }
+
+  .option-text{
+    font-size:15px;
+    color:var(--ink);
+  }
+
+  .confirm-option{
+    border:1.5px solid var(--green-200);
+    background:var(--green-50);
+  }
+  .confirm-option:hover{
+    background:var(--green-100);
+  }
+
+  .error-msg{
+    display:none;
+    align-items:center;
+    gap:6px;
+    color:var(--danger);
+    font-size:13px;
+    margin-top:12px;
+    font-weight:500;
+  }
+  .error-msg .dot{
+    width:16px;height:16px;
+    border-radius:50%;
+    border:1.5px solid var(--danger);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:11px;
+    flex-shrink:0;
+  }
+  .error-msg.show{ display:flex; }
+  .q-card.invalid{ border-color:var(--danger); }
+
+  .form-banner{
+    display:none;
+    align-items:center;
+    gap:10px;
+    margin-top:20px;
+    padding:14px 18px;
+    border-radius:14px;
+    font-size:14px;
+    font-weight:600;
+  }
+  .form-banner.show{ display:flex; }
+  .form-banner.error{
+    background:#fdecea;
+    color:#a3271f;
+    border:1.5px solid #f3b9b3;
+  }
+  .form-banner.loading{
+    background:var(--green-50);
+    color:var(--green-700);
+    border:1.5px solid var(--green-200);
+  }
+
+  .voucher-card{
+    text-align:center;
+    padding:40px 32px 34px;
+  }
+  .voucher-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--green-50);
+    color:var(--green-700);
+    border:1px solid var(--green-200);
+    padding:6px 16px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:18px;
+  }
+  .voucher-nama{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:26px;
+    margin:0 0 6px;
+    color:var(--ink);
+  }
+  .voucher-sub{
+    color:var(--muted);
+    font-size:14.5px;
+    margin:0 0 26px;
+  }
+  .voucher-balance{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    background:linear-gradient(135deg,#eafaf0,#dcf5e4);
+    border:1.5px dashed var(--green-200);
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:18px;
+  }
+  .voucher-balance-label{
+    font-size:13px;
+    font-weight:600;
+    color:var(--green-700);
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .voucher-balance-value{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:38px;
+    color:var(--green-600);
+  }
+  .voucher-date{
+    color:var(--muted);
+    font-size:13.5px;
+    margin:0 0 26px;
+  }
+
+  .voucher-bekas{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .voucher-bekas .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--green-50);
+    border:1px solid var(--green-200);
+    color:var(--green-700);
+    font-size:13px;
+    font-weight:600;
+    padding:6px 12px;
+    border-radius:999px;
+  }
+
+  /* Actions */
+  .actions{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:28px;
+    padding:0 4px;
+  }
+
+  .btn-submit{
+    appearance:none;
+    border:none;
+    cursor:pointer;
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    color:#fff;
+    background:linear-gradient(135deg,#2ec06a,#0f8f5c);
+    padding:13px 34px;
+    border-radius:14px;
+    box-shadow:0 10px 24px rgba(15,143,92,.32);
+    transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .btn-submit:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 30px rgba(15,143,92,.4);
+    filter:brightness(1.04);
+  }
+  .btn-submit:active{
+    transform:translateY(0);
+  }
+
+  .btn-clear{
+    background:none;
+    border:none;
+    cursor:pointer;
+    color:var(--green-600);
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:10px 12px;
+    border-radius:10px;
+    transition:background .15s ease;
+  }
+  .btn-clear:hover{
+    background:var(--green-50);
+    text-decoration:underline;
+  }
+
+  .footer{
+    text-align:center;
+    margin-top:34px;
+    color:var(--muted);
+    font-size:12.5px;
+    line-height:1.9;
+  }
+  .footer a{color:var(--green-600);text-decoration:none;font-weight:600;}
+  .footer a:hover{text-decoration:underline;}
+  .footer .brand-mark{
+    margin-top:6px;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    color:#9aa8a0;
+    letter-spacing:.02em;
+    font-size:13px;
+  }
+
+  @media (max-width:600px){
+    body{padding:24px 10px 60px;}
+    .hero{padding:28px 22px 24px;}
+    h1{font-size:24px;}
+    .q-card{padding:20px 18px 22px;}
+    .actions{flex-direction:row;}
+  }
+
+  /* ---------- Go-green background decoration ---------- */
+  body{
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  .bg-decor{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+    pointer-events:none;
+  }
+
+  .wrap{
+    position:relative;
+    z-index:1;
+  }
+
+  /* soft drifting light blobs, like sun through leaves */
+  .bg-decor .glow{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(60px);
+    opacity:.55;
+  }
+  .bg-decor .glow.g1{
+    width:420px;height:420px;
+    top:-120px; left:-100px;
+    background:radial-gradient(circle, #bdeecb 0%, transparent 70%);
+    animation:drift1 22s ease-in-out infinite;
+  }
+  .bg-decor .glow.g2{
+    width:480px;height:480px;
+    bottom:-160px; right:-140px;
+    background:radial-gradient(circle, #a9e6c4 0%, transparent 70%);
+    animation:drift2 26s ease-in-out infinite;
+  }
+
+  @keyframes drift1{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(40px,30px) scale(1.08); }
+  }
+  @keyframes drift2{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(-30px,-40px) scale(1.06); }
+  }
+
+  /* tree silhouettes anchored to the bottom of the viewport */
+  .bg-decor .treeline{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    height:260px;
+  }
+  .bg-decor .ground{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:34px;
+    background:linear-gradient(180deg, transparent, rgba(30,110,65,.16));
+  }
+  .bg-decor .tree{
+    position:absolute;
+    bottom:-6px;
+    transform-origin:bottom center;
+    animation:sway 6.5s ease-in-out infinite;
+    filter:drop-shadow(0 14px 10px rgba(15,60,35,.18));
+  }
+  .bg-decor .tree.t1{ left:0%;  width:190px; animation-duration:7.5s; }
+  .bg-decor .tree.t2{ left:15%; width:120px; bottom:-10px; opacity:.55; filter:brightness(1.12) saturate(.85) drop-shadow(0 10px 8px rgba(15,60,35,.12)); animation-duration:5.5s; animation-delay:.4s; }
+  .bg-decor .tree.t3{ right:2%; width:210px; animation-duration:6.8s; animation-delay:.2s; }
+  .bg-decor .tree.t4{ right:19%; width:130px; bottom:-10px; opacity:.5; filter:brightness(1.15) saturate(.8) drop-shadow(0 10px 8px rgba(15,60,35,.1)); animation-duration:5s; animation-delay:.6s; }
+
+  @keyframes sway{
+    0%,100%{ transform:rotate(-1.2deg); }
+    50%{ transform:rotate(1.2deg); }
+  }
+
+  /* falling / drifting leaves */
+  .bg-decor .leaf{
+    position:absolute;
+    top:-40px;
+    font-size:22px;
+    opacity:.85;
+    animation-name:fall, sway-leaf;
+    animation-timing-function:linear, ease-in-out;
+    animation-iteration-count:infinite, infinite;
+    will-change:transform;
+  }
+
+  @keyframes fall{
+    0%{ transform:translateY(-10vh) rotate(0deg); }
+    100%{ transform:translateY(115vh) rotate(360deg); }
+  }
+  @keyframes sway-leaf{
+    0%,100%{ margin-left:0px; }
+    50%{ margin-left:38px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .bg-decor .tree,
+    .bg-decor .leaf,
+    .bg-decor .glow{
+      animation:none !important;
+    }
+  }
+
+  @media (max-width:600px){
+    .bg-decor .tree.t2, .bg-decor .tree.t4{ display:none; }
+  }
+
+  /* ---------- Animated leaves framing the form ---------- */
+  .corner-leaf{
+    position:absolute;
+    width:170px;
+    height:170px;
+    pointer-events:none;
+    z-index:2;
+    opacity:.95;
+    filter:drop-shadow(0 10px 14px rgba(15,60,35,.16));
+    animation:leaf-float 5s ease-in-out infinite;
+  }
+  .corner-leaf.tl{ top:-34px;  left:-56px;  transform:scaleX(-1); animation-delay:0s; }
+  .corner-leaf.tr{ top:-34px;  right:-56px; animation-delay:.6s; }
+  .corner-leaf.bl{ bottom:-34px; left:-56px;  transform:rotate(180deg); animation-delay:1.1s; }
+  .corner-leaf.br{ bottom:-34px; right:-56px; transform:scaleY(-1); animation-delay:1.6s; }
+
+  @keyframes leaf-float{
+    0%,100%{ transform-origin:top center; margin-top:0; }
+    50%{ margin-top:6px; }
+  }
+  .corner-leaf.tl{ animation-name:leaf-float-tl; }
+  .corner-leaf.bl, .corner-leaf.br{ animation-name:leaf-float-b; }
+  @keyframes leaf-float-tl{
+    0%,100%{ transform:scaleX(-1) translateY(0); }
+    50%{ transform:scaleX(-1) translateY(6px); }
+  }
+  @keyframes leaf-float-b{
+    0%,100%{ margin-bottom:0; }
+    50%{ margin-bottom:6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .corner-leaf{ animation:none !important; }
+  }
+
+  @media (max-width:760px){
+    .corner-leaf{ width:100px; height:100px; }
+    .corner-leaf.tl{ top:-20px; left:-30px; }
+    .corner-leaf.tr{ top:-20px; right:-30px; }
+    .corner-leaf.bl{ bottom:-20px; left:-30px; }
+    .corner-leaf.br{ bottom:-20px; right:-30px; }
+  }
+
+  @media (max-width:460px){
+    .corner-leaf{ width:70px; height:70px; opacity:.8; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-decor" aria-hidden="true">
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <radialGradient id="foliageGrad" cx="34%" cy="26%" r="78%">
+        <stop offset="0%" stop-color="#69d896"/>
+        <stop offset="45%" stop-color="#2ca866"/>
+        <stop offset="78%" stop-color="#1c8a52"/>
+        <stop offset="100%" stop-color="#0f6b3d"/>
+      </radialGradient>
+      <radialGradient id="foliageGradDark" cx="30%" cy="22%" r="80%">
+        <stop offset="0%" stop-color="#4bc584"/>
+        <stop offset="50%" stop-color="#20955a"/>
+        <stop offset="100%" stop-color="#0d5c36"/>
+      </radialGradient>
+      <linearGradient id="trunkGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#5b3d26"/>
+        <stop offset="45%" stop-color="#8a6444"/>
+        <stop offset="100%" stop-color="#4a3120"/>
+      </linearGradient>
+
+      <symbol id="realTree" viewBox="0 0 100 175">
+        <ellipse cx="50" cy="171" rx="30" ry="5" fill="#0b3d22" opacity=".18"/>
+
+        <path d="M44,108 C43,120 41,135 39,150 C38,158 38,166 39,172 L46,172 C46,164 47,150 48,138 C49,126 49,116 48,108 Z" fill="url(#trunkGrad)"/>
+        <path d="M56,108 C57,122 58,140 59,155 C60,162 60,168 59,172 L52,172 C51,164 50,148 50,134 C50,124 51,114 52,108 Z" fill="url(#trunkGrad)" opacity=".9"/>
+        <path d="M46,120 C40,116 33,116 28,120" stroke="#5b3d26" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>
+        <path d="M55,116 C61,111 69,110 75,113" stroke="#5b3d26" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/>
+
+        <path d="M50,14
+                 C29,10 10,28 12,50
+                 C1,58 -2,78 12,90
+                 C6,106 20,124 38,122
+                 C42,132 58,132 62,122
+                 C80,126 96,108 88,90
+                 C100,78 98,58 86,50
+                 C88,28 71,10 50,14 Z"
+              fill="url(#foliageGrad)"/>
+
+        <path d="M20,55 C14,62 14,76 24,84 C22,94 30,104 40,101" fill="url(#foliageGradDark)" opacity=".55"/>
+        <path d="M78,58 C86,64 88,78 78,88 C82,98 74,108 63,104" fill="url(#foliageGradDark)" opacity=".5"/>
+        <path d="M48,110 C56,113 66,110 70,101 C78,103 84,96 82,88" fill="url(#foliageGradDark)" opacity=".45"/>
+
+        <g fill="#7fe3a8" opacity=".55">
+          <circle cx="34" cy="32" r="7"/>
+          <circle cx="22" cy="46" r="5"/>
+          <circle cx="46" cy="24" r="6"/>
+          <circle cx="60" cy="30" r="5.5"/>
+        </g>
+        <g fill="#0e6b3c" opacity=".35">
+          <circle cx="66" cy="70" r="8"/>
+          <circle cx="52" cy="94" r="7"/>
+          <circle cx="30" cy="82" r="6"/>
+          <circle cx="74" cy="46" r="5"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="treeline">
+    <div class="ground"></div>
+    <svg class="tree t1"><use href="#realTree"/></svg>
+    <svg class="tree t2"><use href="#realTree"/></svg>
+    <svg class="tree t3"><use href="#realTree"/></svg>
+    <svg class="tree t4"><use href="#realTree"/></svg>
+  </div>
+
+  <span class="leaf" style="left:5%;  font-size:20px; animation-duration:14s, 3.2s; animation-delay:0s, 0s;">🍃</span>
+  <span class="leaf" style="left:18%; font-size:16px; animation-duration:18s, 4s;   animation-delay:2s, .3s;">🍃</span>
+  <span class="leaf" style="left:32%; font-size:24px; animation-duration:12s, 3.6s; animation-delay:4s, .6s;">🌿</span>
+  <span class="leaf" style="left:47%; font-size:18px; animation-duration:16s, 3s;   animation-delay:1s, .2s;">🍃</span>
+  <span class="leaf" style="left:61%; font-size:22px; animation-duration:13s, 4.4s; animation-delay:3s, .5s;">🌿</span>
+  <span class="leaf" style="left:74%; font-size:17px; animation-duration:17s, 3.4s; animation-delay:5s, .1s;">🍃</span>
+  <span class="leaf" style="left:86%; font-size:20px; animation-duration:15s, 3.8s; animation-delay:2.5s, .4s;">🌿</span>
+  <span class="leaf" style="left:94%; font-size:15px; animation-duration:19s, 4.2s; animation-delay:.5s, .7s;">🍃</span>
+</div>
+
+<div class="wrap">
+
+  <img class="corner-leaf tl" src="go%20green.gif" alt="" aria-hidden="true">
+  <img class="corner-leaf tr" src="go%20green.gif" alt="" aria-hidden="true">
+  <img class="corner-leaf bl" src="go%20green.gif" alt="" aria-hidden="true">
+  <img class="corner-leaf br" src="go%20green.gif" alt="" aria-hidden="true">
+
+  <div class="accent-bar"></div>
+
+  <header class="hero">
+    <div class="brand">
+      <div class="brand-badge">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 21c-4-1-7-5-7-10 0-3 1.5-6 4-8 1 3 3 4 5 4 3 0 5-2 5-5 4 2 6 6 6 10 0 5-4 9-9 9-1.5 0-3-.4-4-1z" fill="#fff"/></svg>
+      </div>
+      <span class="brand-name">Hospital Serian &middot; MyGovUC</span>
+    </div>
+
+    <h1>Program QR Hijau @ Kafeteria Hospital Serian</h1>
+
+    <p class="tagline">🌿 Program QR Hijau @ Kafeteria Hospital Serian</p>
+
+    <p class="desc">Bawa bekas makanan atau minuman sendiri semasa membeli secara bungkus (tapau).</p>
+
+    <div class="rules">
+      <div class="rule">
+        <span class="icon">✓</span>
+        <span>1 imbasan sahaja setiap hari.</span>
+      </div>
+      <div class="rule gift">
+        <span class="icon">🎁</span>
+        <span>Kumpul 10 imbasan dan layak menebus 1 minuman percuma.</span>
+      </div>
+    </div>
+
+    <p class="thanks">Terima kasih kerana menyokong Hospital Hijau.</p>
+  </header>
+
+  <div class="required-note">* Menunjukkan soalan yang perlu dijawab</div>
+
+  <form>
+
+    <!-- Nama Penuh -->
+    <div class="q-card" data-field="nama">
+      <div class="q-label">Nama Penuh <span class="req">*</span></div>
+      <input type="text" id="nama" name="nama" placeholder="Jawapan anda">
+      <div class="error-msg"><span class="dot">!</span><span class="msg-text">Soalan ini mesti dijawab</span></div>
+    </div>
+
+    <!-- No. Telefon -->
+    <div class="q-card" data-field="noTelefon">
+      <div class="q-label">No. Telefon <span class="req">*</span></div>
+      <input type="tel" id="noTelefon" name="noTelefon" placeholder="Jawapan anda">
+      <div class="error-msg"><span class="dot">!</span><span class="msg-text">Soalan ini mesti dijawab</span></div>
+    </div>
+
+    <!-- Kategori -->
+    <div class="q-card" data-field="kategori">
+      <div class="q-label">Kategori <span class="req">*</span></div>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="kategori" value="Warga Hospital Serian">
+          <span class="radio-ui"></span>
+          <span class="option-text">Warga Hospital Serian</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="kategori" value="Pesakit">
+          <span class="radio-ui"></span>
+          <span class="option-text">Pesakit</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="kategori" value="Waris">
+          <span class="radio-ui"></span>
+          <span class="option-text">Waris</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="kategori" value="Pelawat">
+          <span class="radio-ui"></span>
+          <span class="option-text">Pelawat</span>
+        </label>
+      </div>
+      <div class="error-msg"><span class="dot">!</span><span class="msg-text">Soalan ini mesti dijawab</span></div>
+    </div>
+
+    <!-- Bekas yang dibawa -->
+    <div class="q-card" data-field="bekas">
+      <div class="q-label">Bekas yang dibawa <span class="req">*</span></div>
+      <div class="options">
+        <label class="option">
+          <input type="checkbox" name="bekas" value="Bekas makanan sendiri">
+          <span class="check-ui"></span>
+          <span class="option-text">Bekas makanan sendiri</span>
+        </label>
+        <label class="option">
+          <input type="checkbox" name="bekas" value="Tumbler / Bekas minuman sendiri">
+          <span class="check-ui"></span>
+          <span class="option-text">Tumbler / Bekas minuman sendiri</span>
+        </label>
+      </div>
+      <div class="error-msg"><span class="dot">!</span><span class="msg-text">Soalan ini mesti dijawab</span></div>
+    </div>
+
+    <!-- Pengesahan -->
+    <div class="q-card" data-field="pengesahan">
+      <div class="q-label">Pengesahan <span class="req">*</span></div>
+      <div class="options">
+        <label class="option confirm-option">
+          <input type="radio" name="pengesahan" value="ya">
+          <span class="radio-ui"></span>
+          <span class="option-text">Saya mengesahkan saya membawa bekas sendiri.</span>
+        </label>
+      </div>
+      <div class="error-msg"><span class="dot">!</span><span class="msg-text">Soalan ini mesti dijawab</span></div>
+    </div>
+
+    <div class="form-banner" id="formBanner"></div>
+
+    <div class="actions">
+      <button type="submit" class="btn-submit" id="btnSubmit">
+        <span id="btnSubmitText">Serah</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+      <button type="button" class="btn-clear" id="btnClear">Kosongkan borang</button>
+    </div>
+  </form>
+
+  <!-- Voucher hasil (dipaparkan lepas submit berjaya) -->
+  <div class="q-card voucher-card" id="voucherCard" style="display:none">
+    <div class="voucher-badge">🎉 Voucher Berjaya Ditebus</div>
+    <h2 class="voucher-nama" id="voucherNama"></h2>
+    <p class="voucher-sub" id="voucherKategori"></p>
+    <div class="voucher-balance">
+      <span class="voucher-balance-label">Baki Voucher</span>
+      <span class="voucher-balance-value"><span id="voucherBaki">0</span> / 10</span>
+    </div>
+    <div class="voucher-bekas" id="voucherBekas"></div>
+    <p class="voucher-date">Ditebus pada: <span id="voucherTarikh"></span></p>
+    <button type="button" class="btn-submit" id="btnIsiSemula">Isi Borang Lain</button>
+  </div>
+
+  <div class="footer">
+    Jangan sekali-kali serahkan kata laluan melalui borang ini.<br>
+    <a href="https://wa.me/60107991987" target="_blank" rel="noopener">Borang ini dibuat oleh unit ICT HSER</a>
+    <div class="brand-mark">🌿 Hospital Hijau</div>
+  </div>
+
+</div>
+
+<script>
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyJnbVgsX4KDAkXVFjlmDI9q6CiluGom6JelV_P5PMASYuG2DBCxHGkzZvDYlQ-OSFHRg/exec";
+
+  const form = document.querySelector('form');
+  const banner = document.getElementById('formBanner');
+  const btnSubmit = document.getElementById('btnSubmit');
+  const btnSubmitText = document.getElementById('btnSubmitText');
+  const btnClear = document.getElementById('btnClear');
+  const btnIsiSemula = document.getElementById('btnIsiSemula');
+  const voucherCard = document.getElementById('voucherCard');
+
+  function clearErrors(){
+    form.querySelectorAll('.q-card.invalid').forEach(el => el.classList.remove('invalid'));
+    form.querySelectorAll('.error-msg.show').forEach(el => el.classList.remove('show'));
+    hideBanner();
+  }
+
+  function markInvalid(field, customMsg){
+    const card = form.querySelector(`.q-card[data-field="${field}"]`);
+    if(!card) return;
+    card.classList.add('invalid');
+    const msg = card.querySelector('.error-msg');
+    if(msg){
+      msg.classList.add('show');
+      const textEl = msg.querySelector('.msg-text');
+      if(textEl) textEl.textContent = customMsg || 'Soalan ini mesti dijawab';
+    }
+  }
+
+  function showBanner(text, type){
+    banner.textContent = text;
+    banner.className = `form-banner show ${type}`;
+  }
+
+  function hideBanner(){
+    banner.className = 'form-banner';
+  }
+
+  function validate(){
+    clearErrors();
+    let ok = true;
+
+    const nama = document.getElementById('nama').value.trim();
+    if(!nama){ markInvalid('nama'); ok = false; }
+
+    const noTelefon = document.getElementById('noTelefon').value.trim();
+    if(!noTelefon){
+      markInvalid('noTelefon');
+      ok = false;
+    } else if(!/^01\d{7,9}$/.test(noTelefon.replace(/\D/g, ''))){
+      markInvalid('noTelefon', 'Nombor telefon tidak sah (cth: 0123456789).');
+      ok = false;
+    }
+
+    if(!form.querySelector('input[name="kategori"]:checked')){ markInvalid('kategori'); ok = false; }
+    if(form.querySelectorAll('input[name="bekas"]:checked').length === 0){ markInvalid('bekas'); ok = false; }
+    if(!form.querySelector('input[name="pengesahan"]:checked')){ markInvalid('pengesahan'); ok = false; }
+
+    return ok;
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    if(!validate()) return;
+
+    const nama = document.getElementById('nama').value.trim();
+    const noTelefon = document.getElementById('noTelefon').value.trim();
+    const kategori = form.querySelector('input[name="kategori"]:checked').value;
+    const bekas = Array.from(form.querySelectorAll('input[name="bekas"]:checked')).map(el => el.value);
+
+    btnSubmit.disabled = true;
+    btnSubmitText.textContent = 'Menghantar...';
+    showBanner('Sedang menghantar borang anda...', 'loading');
+
+    try {
+      const cacheBust = Date.now();
+      const res = await fetch(`${APPS_SCRIPT_URL}?cb=${cacheBust}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ nama, noTelefon, kategori, bekas })
+      });
+      const data = await res.json();
+
+      if(data.status === 'ok'){
+        hideBanner();
+        document.getElementById('voucherNama').textContent = data.nama;
+        document.getElementById('voucherKategori').textContent = kategori + ' — Minuman Percuma';
+        document.getElementById('voucherBaki').textContent = data.baki;
+        document.getElementById('voucherTarikh').textContent = data.tarikh;
+        document.getElementById('voucherBekas').innerHTML = bekas
+          .map(item => `<span class="chip">✅ ${item}</span>`)
+          .join('');
+        form.style.display = 'none';
+        voucherCard.style.display = 'block';
+      } else {
+        let msg = data.sebab || 'Penyerahan gagal. Sila cuba lagi.';
+        if (typeof data.baki === 'number') {
+          msg += ` Baki voucher anda: ${data.baki}/10.`;
+        }
+        showBanner(msg, 'error');
+      }
+    } catch(err){
+      showBanner('Ralat sambungan. Sila semak internet anda dan cuba lagi.', 'error');
+    } finally {
+      btnSubmit.disabled = false;
+      btnSubmitText.textContent = 'Serah';
+    }
+  });
+
+  btnClear.addEventListener('click', function(){
+    form.reset();
+    clearErrors();
+  });
+
+  btnIsiSemula.addEventListener('click', function(){
+    form.reset();
+    clearErrors();
+    voucherCard.style.display = 'none';
+    form.style.display = 'block';
+  });
+</script>
+</body>
+</html>

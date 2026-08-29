@@ -433,7 +433,7 @@
     font-weight:800;
     font-size:26px;
     margin:0 0 6px;
-    color:var(--ink);
+    color:var(--green-700);
   }
   .voucher-sub{
     color:var(--muted);
@@ -466,51 +466,59 @@
     border-radius:999px;
   }
 
-  /* Stamp card — 10 imbasan */
+  /* Stamp card — imbasan terkumpul */
   .stamp-panel{
+    position:relative;
+    overflow:hidden;
     background:linear-gradient(135deg,#eafaf0,#dcf5e4);
     border:1.5px dashed var(--green-200);
     border-radius:18px;
-    padding:22px 18px;
+    padding:22px 20px;
     margin-bottom:22px;
+    text-align:left;
   }
-  .stamp-row{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:14px;
+  .stamp-can{
+    position:absolute;
+    top:0; right:0;
+    width:48%;
+    height:100%;
+    -webkit-mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.35) 28%, #000 62%);
+    mask-image:linear-gradient(to right, transparent 0%, rgba(0,0,0,.35) 28%, #000 62%);
+    pointer-events:none;
   }
-  .stamp-dot{
-    width:28px; height:28px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:14px;
-    flex-shrink:0;
-    transition:transform .2s ease;
+  .stamp-can img{
+    position:absolute;
+    top:50%; right:-28px;
+    height:118%;
+    width:auto;
+    max-width:none;
+    transform:translateY(-50%);
   }
-  .stamp-dot.filled{
-    background:linear-gradient(145deg,#2ec06a,#0f8f5c);
-    color:#fff;
-    box-shadow:0 4px 10px rgba(15,143,92,.35);
-  }
-  .stamp-dot.empty{
-    background:#fff;
-    border:2px dashed var(--green-200);
-    color:transparent;
-  }
-  .stamp-caption{
-    font-size:14.5px;
-    font-weight:600;
+  .stamp-stat-label{
+    position:relative; z-index:1;
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
     color:var(--green-700);
-    margin:0;
   }
-  .stamp-caption .count{
+  .stamp-stat-value{
+    position:relative; z-index:1;
+    display:block;
     font-family:'Poppins',sans-serif;
     font-weight:800;
-    font-size:17px;
+    font-size:46px;
+    line-height:1.1;
+    color:var(--green-600);
+  }
+  .stamp-caption{
+    position:relative; z-index:1;
+    font-size:13.5px;
+    font-weight:600;
+    color:#2f6b47;
+    margin:8px 0 0;
+    max-width:62%;
   }
 
   /* Ribbon — dipaparkan bila layak tebus */
@@ -988,7 +996,9 @@
     <div class="ticket-divider"></div>
 
     <div class="stamp-panel">
-      <div class="stamp-row" id="stampRow"></div>
+      <div class="stamp-can"><img src="vourcher%20bg.png" alt=""></div>
+      <span class="stamp-stat-label" id="stampLabel">BAKI</span>
+      <span class="stamp-stat-value" id="stampValue">0</span>
       <p class="stamp-caption" id="stampCaption"></p>
     </div>
 
@@ -1101,29 +1111,27 @@
           .map(item => `<span class="chip">✅ ${item}</span>`)
           .join('');
 
-        // Stamp dots — kalau baru menang, papar 10/10 penuh dulu sebelum kad reset
-        const filledCount = layak ? target : imbasan;
-        let dots = '';
-        for(let i = 1; i <= target; i++){
-          dots += `<span class="stamp-dot ${i <= filledCount ? 'filled' : 'empty'}">${i <= filledCount ? '✓' : ''}</span>`;
-        }
-        document.getElementById('stampRow').innerHTML = dots;
-
         const voucherCardEl = document.getElementById('voucherCard');
         const badge = document.getElementById('voucherBadge');
         const ribbon = document.getElementById('winRibbon');
+        const label = document.getElementById('stampLabel');
+        const value = document.getElementById('stampValue');
         const caption = document.getElementById('stampCaption');
 
         if(layak){
           voucherCardEl.classList.add('win');
           badge.textContent = '🎉 Tahniah, Kad Genap!';
           ribbon.style.display = 'block';
-          caption.innerHTML = `Anda layak menebus <span class="count">1 Minuman PERCUMA</span> hari ini! Kad direset — mula kumpul semula.`;
+          label.textContent = 'IMBASAN';
+          value.textContent = `${target}/${target}`;
+          caption.textContent = 'Anda layak menebus 1 Minuman PERCUMA hari ini! Kad direset — mula kumpul semula.';
         } else {
           voucherCardEl.classList.remove('win');
           badge.textContent = '🌿 Imbasan Berjaya Direkod';
           ribbon.style.display = 'none';
-          caption.innerHTML = `<span class="count">${imbasan}/${target}</span> imbasan terkumpul — ${target - imbasan} lagi untuk minuman percuma!`;
+          label.textContent = 'BAKI';
+          value.textContent = target - imbasan;
+          caption.textContent = `imbasan lagi untuk 1 Minuman PERCUMA (${imbasan}/${target} terkumpul)`;
         }
 
         form.style.display = 'none';

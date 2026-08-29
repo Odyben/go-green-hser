@@ -383,8 +383,32 @@
 
   .voucher-card{
     text-align:center;
-    padding:40px 32px 34px;
+    padding:36px 32px 30px;
+    position:relative;
+    overflow:visible;
+    background:
+      radial-gradient(420px 220px at 50% -60px, var(--green-50) 0%, transparent 70%),
+      var(--card);
   }
+
+  /* punch-hole notches, macam tiket sebenar */
+  .ticket-notch{
+    position:absolute;
+    top:150px;
+    width:26px; height:26px;
+    border-radius:50%;
+    background:var(--page-bg-2);
+    box-shadow:inset 0 0 0 1.5px var(--green-100);
+    z-index:2;
+  }
+  .ticket-notch.left{ left:-13px; }
+  .ticket-notch.right{ right:-13px; }
+
+  .ticket-divider{
+    border-top:2px dashed var(--green-200);
+    margin:24px 0;
+  }
+
   .voucher-badge{
     display:inline-flex;
     align-items:center;
@@ -398,6 +422,12 @@
     font-weight:700;
     margin-bottom:18px;
   }
+  .voucher-card.win .voucher-badge{
+    background:linear-gradient(135deg,#fff4d9,#ffe4b0);
+    color:#9a5b06;
+    border-color:#f0c877;
+  }
+
   .voucher-nama{
     font-family:'Poppins',sans-serif;
     font-weight:800;
@@ -408,36 +438,12 @@
   .voucher-sub{
     color:var(--muted);
     font-size:14.5px;
-    margin:0 0 26px;
-  }
-  .voucher-balance{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:4px;
-    background:linear-gradient(135deg,#eafaf0,#dcf5e4);
-    border:1.5px dashed var(--green-200);
-    border-radius:18px;
-    padding:20px;
-    margin-bottom:18px;
-  }
-  .voucher-balance-label{
-    font-size:13px;
-    font-weight:600;
-    color:var(--green-700);
-    text-transform:uppercase;
-    letter-spacing:.04em;
-  }
-  .voucher-balance-value{
-    font-family:'Poppins',sans-serif;
-    font-weight:800;
-    font-size:38px;
-    color:var(--green-600);
+    margin:0;
   }
   .voucher-date{
     color:var(--muted);
     font-size:13.5px;
-    margin:0 0 26px;
+    margin:18px 0 26px;
   }
 
   .voucher-bekas{
@@ -445,7 +451,7 @@
     flex-wrap:wrap;
     justify-content:center;
     gap:8px;
-    margin-bottom:14px;
+    margin-bottom:6px;
   }
   .voucher-bekas .chip{
     display:inline-flex;
@@ -458,6 +464,71 @@
     font-weight:600;
     padding:6px 12px;
     border-radius:999px;
+  }
+
+  /* Stamp card — 10 imbasan */
+  .stamp-panel{
+    background:linear-gradient(135deg,#eafaf0,#dcf5e4);
+    border:1.5px dashed var(--green-200);
+    border-radius:18px;
+    padding:22px 18px;
+    margin-bottom:22px;
+  }
+  .stamp-row{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .stamp-dot{
+    width:28px; height:28px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    flex-shrink:0;
+    transition:transform .2s ease;
+  }
+  .stamp-dot.filled{
+    background:linear-gradient(145deg,#2ec06a,#0f8f5c);
+    color:#fff;
+    box-shadow:0 4px 10px rgba(15,143,92,.35);
+  }
+  .stamp-dot.empty{
+    background:#fff;
+    border:2px dashed var(--green-200);
+    color:transparent;
+  }
+  .stamp-caption{
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--green-700);
+    margin:0;
+  }
+  .stamp-caption .count{
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:17px;
+  }
+
+  /* Ribbon — dipaparkan bila layak tebus */
+  .win-ribbon{
+    position:absolute;
+    top:22px; right:-38px;
+    width:150px;
+    padding:7px 0;
+    background:linear-gradient(135deg,#ffb238,#f0a83a);
+    color:#5c3a00;
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:12.5px;
+    letter-spacing:.06em;
+    text-align:center;
+    transform:rotate(45deg);
+    box-shadow:0 6px 14px rgba(240,168,58,.4);
+    z-index:3;
   }
 
   /* Actions */
@@ -906,15 +977,23 @@
 
   <!-- Voucher hasil (dipaparkan lepas submit berjaya) -->
   <div class="q-card voucher-card" id="voucherCard" style="display:none">
-    <div class="voucher-badge">🎉 Voucher Berjaya Ditebus</div>
+    <div class="ticket-notch left"></div>
+    <div class="ticket-notch right"></div>
+    <div class="win-ribbon" id="winRibbon" style="display:none">PERCUMA!</div>
+
+    <div class="voucher-badge" id="voucherBadge">🌿 Imbasan Berjaya Direkod</div>
     <h2 class="voucher-nama" id="voucherNama"></h2>
     <p class="voucher-sub" id="voucherKategori"></p>
-    <div class="voucher-balance">
-      <span class="voucher-balance-label">Baki Voucher</span>
-      <span class="voucher-balance-value"><span id="voucherBaki">0</span> / 10</span>
+
+    <div class="ticket-divider"></div>
+
+    <div class="stamp-panel">
+      <div class="stamp-row" id="stampRow"></div>
+      <p class="stamp-caption" id="stampCaption"></p>
     </div>
+
     <div class="voucher-bekas" id="voucherBekas"></div>
-    <p class="voucher-date">Ditebus pada: <span id="voucherTarikh"></span></p>
+    <p class="voucher-date">Diimbas pada: <span id="voucherTarikh"></span></p>
     <button type="button" class="btn-submit" id="btnIsiSemula">Isi Borang Lain</button>
   </div>
 
@@ -1011,19 +1090,48 @@
 
       if(data.status === 'ok'){
         hideBanner();
+        const target = data.target || 10;
+        const imbasan = data.imbasan;
+        const layak = !!data.layakTebus;
+
         document.getElementById('voucherNama').textContent = data.nama;
-        document.getElementById('voucherKategori').textContent = kategori + ' — Minuman Percuma';
-        document.getElementById('voucherBaki').textContent = data.baki;
+        document.getElementById('voucherKategori').textContent = kategori;
         document.getElementById('voucherTarikh').textContent = data.tarikh;
         document.getElementById('voucherBekas').innerHTML = bekas
           .map(item => `<span class="chip">✅ ${item}</span>`)
           .join('');
+
+        // Stamp dots — kalau baru menang, papar 10/10 penuh dulu sebelum kad reset
+        const filledCount = layak ? target : imbasan;
+        let dots = '';
+        for(let i = 1; i <= target; i++){
+          dots += `<span class="stamp-dot ${i <= filledCount ? 'filled' : 'empty'}">${i <= filledCount ? '✓' : ''}</span>`;
+        }
+        document.getElementById('stampRow').innerHTML = dots;
+
+        const voucherCardEl = document.getElementById('voucherCard');
+        const badge = document.getElementById('voucherBadge');
+        const ribbon = document.getElementById('winRibbon');
+        const caption = document.getElementById('stampCaption');
+
+        if(layak){
+          voucherCardEl.classList.add('win');
+          badge.textContent = '🎉 Tahniah, Kad Genap!';
+          ribbon.style.display = 'block';
+          caption.innerHTML = `Anda layak menebus <span class="count">1 Minuman PERCUMA</span> hari ini! Kad direset — mula kumpul semula.`;
+        } else {
+          voucherCardEl.classList.remove('win');
+          badge.textContent = '🌿 Imbasan Berjaya Direkod';
+          ribbon.style.display = 'none';
+          caption.innerHTML = `<span class="count">${imbasan}/${target}</span> imbasan terkumpul — ${target - imbasan} lagi untuk minuman percuma!`;
+        }
+
         form.style.display = 'none';
-        voucherCard.style.display = 'block';
+        voucherCardEl.style.display = 'block';
       } else {
         let msg = data.sebab || 'Penyerahan gagal. Sila cuba lagi.';
-        if (typeof data.baki === 'number') {
-          msg += ` Baki voucher anda: ${data.baki}/10.`;
+        if (typeof data.imbasan === 'number') {
+          msg += ` (Imbasan terkumpul: ${data.imbasan}/${data.target || 10})`;
         }
         showBanner(msg, 'error');
       }
@@ -1043,6 +1151,7 @@
   btnIsiSemula.addEventListener('click', function(){
     form.reset();
     clearErrors();
+    voucherCard.classList.remove('win');
     voucherCard.style.display = 'none';
     form.style.display = 'block';
   });

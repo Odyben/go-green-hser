@@ -156,41 +156,6 @@
     margin:0;
   }
 
-  .meta-bar{
-    margin-top:24px;
-    padding-top:18px;
-    border-top:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    flex-wrap:wrap;
-  }
-  .account{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-size:13.5px;
-    color:var(--muted);
-  }
-  .avatar{
-    width:26px;height:26px;
-    border-radius:50%;
-    background:linear-gradient(145deg,#2ec06a,#0f8f5c);
-    color:#fff;
-    font-size:12px;font-weight:700;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .account a{color:var(--green-600);text-decoration:none;font-weight:600;}
-  .account a:hover{text-decoration:underline;}
-  .saved{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    font-size:13px;
-    color:var(--muted);
-  }
-
   .required-note{
     background:var(--card);
     border-radius:var(--radius);
@@ -493,6 +458,11 @@
     width:auto;
     max-width:none;
     transform:translateY(-50%);
+    transition:opacity .2s ease;
+  }
+  .voucher-card.win .stamp-can img{
+    right:10px;
+    height:106%;
   }
   .stamp-stat-label{
     position:relative; z-index:1;
@@ -1006,7 +976,7 @@
     <div class="ticket-divider"></div>
 
     <div class="stamp-panel">
-      <div class="stamp-can"><img src="vourcher%20bg.png" alt=""></div>
+      <div class="stamp-can"><img id="stampCanImg" src="vourcher%20bg.png" alt=""></div>
       <span class="stamp-stat-label" id="stampLabel">BAKI</span>
       <span class="stamp-stat-value" id="stampValue">0</span>
       <p class="stamp-caption" id="stampCaption"></p>
@@ -1127,6 +1097,7 @@
         const label = document.getElementById('stampLabel');
         const value = document.getElementById('stampValue');
         const caption = document.getElementById('stampCaption');
+        const canImg = document.getElementById('stampCanImg');
 
         if(layak){
           voucherCardEl.classList.add('win');
@@ -1135,6 +1106,7 @@
           label.textContent = 'IMBASAN';
           value.textContent = `${target}/${target}`;
           caption.textContent = 'Anda layak menebus 1 Minuman PERCUMA hari ini! Kad direset — mula kumpul semula.';
+          canImg.src = 'hadiah%20complete.png';
         } else {
           voucherCardEl.classList.remove('win');
           badge.textContent = '🌿 Imbasan Berjaya Direkod';
@@ -1142,6 +1114,7 @@
           label.textContent = 'BAKI';
           value.textContent = target - imbasan;
           caption.textContent = `imbasan lagi untuk 1 Minuman PERCUMA (${imbasan}/${target} terkumpul)`;
+          canImg.src = 'vourcher%20bg.png';
         }
 
         form.style.display = 'none';
